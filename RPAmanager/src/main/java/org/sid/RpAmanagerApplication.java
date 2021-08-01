@@ -1,16 +1,14 @@
 package org.sid;
 
 
-import javax.annotation.Resource;
 
-import org.sid.entities.Environnement;
-import org.sid.entities.Robot;
-import org.sid.repository.RobotRepository;
-import org.sid.service.FileStaticStorage;
-import org.springframework.beans.factory.annotation.Autowired;
+
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class RpAmanagerApplication implements CommandLineRunner {
@@ -36,5 +34,10 @@ public class RpAmanagerApplication implements CommandLineRunner {
 		// storageService.deleteAll();
 		//storagestaticService.loadAll();
 
+	}
+	
+	@Bean
+	BCryptPasswordEncoder getBCPE() {
+		return new BCryptPasswordEncoder();
 	}
 }

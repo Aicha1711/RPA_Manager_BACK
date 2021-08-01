@@ -87,8 +87,14 @@ inverseJoinColumns = { @JoinColumn(name = "robot_id", referencedColumnName = "id
 	public void setRobots(Set<Robot> robots) {
 		this.robots = robots;
 	}
+	@Override
+	public String toString() {
+		return "Environnement [id=" + id + ", name=" + name + ", description=" + description + ", robots=" + robots
+				+ "]";
+	}
 
 
+	
 
 
 	

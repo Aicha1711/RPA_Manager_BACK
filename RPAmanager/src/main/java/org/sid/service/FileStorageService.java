@@ -31,6 +31,7 @@ public class FileStorageService {
   public Stream<FileDB> getAllFiles() {
     return fileDBRepository.findAll().stream();
   }
-  
+   
+ 
   
 }

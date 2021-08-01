@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.sid.entities.FileDB;
+
 import org.sid.message.*;
 import org.sid.service.*;
 @Controller
@@ -30,6 +31,7 @@ public class FileController {
   public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
     String message = "";
     try {
+
       storageService.store(file);
       storagestaticService.save(file);
       
@@ -41,25 +43,21 @@ public class FileController {
     }
   }
 
-  @GetMapping("/posts")
-  public ResponseEntity<List<ResponseFile>> getListFiles() {
-    List<ResponseFile> files = storageService.getAllFiles().map(dbFile -> {
-      String fileDownloadUri = ServletUriComponentsBuilder
-          .fromCurrentContextPath()
-          .path("/files/")
-          .path(dbFile.getId())
-          .toUriString();
+	@GetMapping("/posts")
+	public ResponseEntity<List<ResponseFile>> getListFiles() {
+		List<ResponseFile> files = storageService.getAllFiles().map(dbFile -> {
+			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
+					.path(dbFile.getUuid()).toUriString();
 
-      return new ResponseFile(
-          dbFile.getName(),
-          fileDownloadUri,
-          dbFile.getType(),
-          dbFile.getData().length);
-    }).collect(Collectors.toList());
+			return new ResponseFile(dbFile.getName(), fileDownloadUri, dbFile.getType(), dbFile.getData().length);
+		}).collect(Collectors.toList());
 
-    return ResponseEntity.status(HttpStatus.OK).body(files);
-  }
+		return ResponseEntity.status(HttpStatus.OK).body(files);
+	}
 
+	
+  
+  
   @GetMapping("/posts/{id}")
   public ResponseEntity<byte[]> getFile(@PathVariable String id) {
     FileDB fileDB = storageService.getFile(id);
@@ -68,14 +66,6 @@ public class FileController {
         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
         .body(fileDB.getData());
   }
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   

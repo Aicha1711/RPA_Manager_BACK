@@ -14,4 +14,6 @@ public interface FileStaticStorage {
 	  public void deleteAll();
 
 	  public Stream<Path> loadAll();
+	  
+	
 }

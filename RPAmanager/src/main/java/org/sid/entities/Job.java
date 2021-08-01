@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
 @Entity
@@ -24,8 +24,7 @@ public class Job {
 	@Column(name = "Priority")
 	private Boolean priority;
 
-	@ManyToOne
-	private Environnement environnement;
+	
 
 	public Long getId() {
 		return id;
@@ -53,13 +52,7 @@ public class Job {
 		this.priority = priority;
 	}
 
-	public Environnement getEnvironnement() {
-		return environnement;
-	}
 
-	public void setEnvironnement(Environnement environnement) {
-		this.environnement = environnement;
-	}
 
 	public Job() {
 		super();
@@ -70,7 +63,7 @@ public class Job {
 		super();
 		this.name = name;
 		this.priority = priority;
-		this.environnement = environnement;
+	
 	}
 
 }

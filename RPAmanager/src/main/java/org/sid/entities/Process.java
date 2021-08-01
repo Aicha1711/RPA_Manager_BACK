@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -30,31 +31,15 @@ public class Process {
 	private Environnement environnement;
 	//@JoinColumn(name="env_id", referencedColumnName="id")
 	
-	
-	
-	
-	public Process(String name, String description, Boolean priority, Environnement environnement) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.priority = priority;
-		this.environnement = environnement;
+	@ManyToOne
+	private  FileDB file;
+
+	public FileDB getFile() {
+		return file;
 	}
 
-
-	public Environnement getEnvironnement() {
-		return environnement;
-	}
-
-	
-
-	public void setEnvironnement(Environnement environnement) {
-		this.environnement = environnement;
-	}
-
-	public Process() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setFile(FileDB file) {
+		this.file = file;
 	}
 
 	public Long getId() {
@@ -88,6 +73,32 @@ public class Process {
 	public void setPriority(Boolean priority) {
 		this.priority = priority;
 	}
+
+	public Environnement getEnvironnement() {
+		return environnement;
+	}
+
+	public void setEnvironnement(Environnement environnement) {
+		this.environnement = environnement;
+	}
+
+	
+
+	public Process() {
+		
+	}
+
+	public Process(String name, String description, Boolean priority, Environnement environnement, FileDB file) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.priority = priority;
+		this.environnement = environnement;
+		this.file = file;
+	}
+
+	
+	
 
 	
 	
